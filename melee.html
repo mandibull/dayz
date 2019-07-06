@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>DayZ 1.04 melee values</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.2.7/css/tabulator.min.css" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.2.7/js/tabulator.min.js"></script>
+        <script>
+            $(function() {
+                var meleeDamageTableParams = {
+                    layout: "fitColumns",
+                    responsiveLayout: "hide",
+                    // pagination: "local",
+                    // paginationSize: 30,
+                    initialSort: [
+                        {column: "health_damage", dir: "desc"},
+                    ],
+                    columns: [
+                        {title: "ID", width: 210, field: "id", headerFilter: "input"},
+                        {title: "Health", width: 80, field: "health_damage", align:"right", sorter:"number"},
+                        {title: "Blood", width: 80, field: "blood_damage", align:"right", sorter:"number"},
+                        {title: "Shock", width: 80, field: "shock_damage", align:"right", sorter:"number"},
+                        {title: "Bleed<br>chance", width: 80, field: "bleed_chance", align:"right", sorter:"number"},
+                        {title: "Animal<br>multiplier", width: 100, field: "animal_multiplier", align:"right", sorter:"number"},
+                    ],
+                };
+
+                new Tabulator("#dayz-melee-damage-table", meleeDamageTableParams).setData("dayz-melee-damage_1.04.json");
+            });
+        </script>
+    </head>
+    <body>
+        <h1>DayZ 1.04 melee values</h1>
+        <p>These are the raw melee types and not the items themselves.</p>
+        <p>As a reference canned food have the <b>MeleeBlunt</b> damage type.</p>
+        <table id="dayz-melee-damage-table" style="width: 630px;"></table>
+    </body>
+</html>

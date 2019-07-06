@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>DayZ 1.04 survivor data</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.2.7/css/tabulator.min.css" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.2.7/js/tabulator.min.js"></script>
+        <script>
+            $(function() {
+                var meleeDamageTableParams = {
+                    layout: "fitColumns",
+                    responsiveLayout: "hide",
+                    // pagination: "local",
+                    // paginationSize: 30,
+                    initialSort: [
+                        {column: "id", dir: "asc"},
+                    ],
+                    columns: [
+                        {title: "ID",  field: "id"},
+
+                        {title: "Health", width: 80, field: "Health_hitpoints", align:"right", sorter:"number"},
+                        {title: "Health<br>to global<br>hp coef", field: "Health_transferToGlobalCoef", align:"right", sorter:"number"},
+                        {title: "Health<br>coef vs<br>projectile", field: "armor_Projectile_Health_damage", align:"right", sorter:"number"},
+                        {title: "Health<br>coef vs<br>infected", field: "armor_Infected_Health_damage", align:"right", sorter:"number"},
+                        {title: "Health<br>coef vs<br>melee", field: "armor_Melee_Health_damage", align:"right", sorter:"number"},
+
+                        {title: "Blood", width: 80, field: "Blood_hitpoints", align:"right", sorter:"number"},
+                        {title: "Blood<br>to global<br>hp coef", field: "Blood_transferToGlobalCoef", align:"right", sorter:"number"},
+                        {title: "Blood<br>coef vs<br>projectile", field: "armor_Projectile_Blood_damage", align:"right", sorter:"number"},
+                        {title: "Blood<br>coef vs<br>infected", field: "armor_Infected_Blood_damage", align:"right", sorter:"number"},
+                        {title: "Blood<br>coef vs<br>melee", field: "armor_Melee_Blood_damage", align:"right", sorter:"number"},
+                        
+                        {title: "Shock", width: 80, field: "Shock_hitpoints", align:"right", sorter:"number"},
+                        {title: "Shock<br>to global<br>hp coef", field: "Shock_transferToGlobalCoef", align:"right", sorter:"number"},
+                        {title: "Shock<br>coef vs<br>projectile", field: "armor_Projectile_Shock_damage", align:"right", sorter:"number"},
+                        {title: "Shock<br>coef vs<br>infected", field: "armor_Infected_Shock_damage", align:"right", sorter:"number"},
+                        {title: "Shock<br>coef vs<br>melee", field: "armor_Melee_Shock_damage", align:"right", sorter:"number"},
+                    ],
+                };
+
+                new Tabulator("#dayz-survivor-body-table", meleeDamageTableParams).setData("dayz-survivor-body_1.04.json");
+            });
+        </script>
+    </head>
+    <body>
+        <h1>DayZ 1.04 survivor data</h1>
+        <p>Note: "shock" system is not in game yet.</p>
+        <p>From my understanding, if a limb reaches 0 health you will die.</p>
+        <h2>Global survivor health values (non-limb)</h2>
+        <ul>
+            <li>Health: 100</li>
+            <li>Blood: 5000</li>
+            <li>Shock: 100</li>
+        </ul>
+        <h2>Limb health and damage resistance</h2>
+        <table id="dayz-survivor-body-table"></table>
+    </body>
+</html>

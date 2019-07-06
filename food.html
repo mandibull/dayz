@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>DayZ 1.04 food values</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.2.7/css/tabulator.min.css" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.2.7/js/tabulator.min.js"></script>
+        <script>
+            $(function() {
+                var foodTableParams = {
+                    layout: "fitColumns",
+                    responsiveLayout: "hide",
+                    // pagination: "local",
+                    // paginationSize: 30,
+                    initialSort: [
+                        {column: "name", dir: "asc"},
+                    ],
+                    columns: [
+                        {title: "Name", field: "name", headerFilter:"input"},
+                        // {title: "ID", field: "id", headerFilter:"input"},
+                        {title: "Energy (kcal)", field: "energy", align:"right", sorter:"number"},
+                        {title: "Water (mL)", field: "water", align:"right", sorter:"number"},
+                        // {title: "Stomach", field: "fullness", align:"right", sorter:"number"},
+                        {title: "Weight (g)", field: "weight", align:"right", sorter:"number"},
+                        // {title: "Slots", field: "nb_slots", align:"right", sorter:"number"},
+                        {title: "Size", field: "size", align:"right", sorter:"number"},
+                        // {title: "Toxicity", field: "toxicity", align:"right", sorter:"number"},
+                        {title: "Energy/slot", field: "energy_per_slot", align:"right", sorter:"number"},
+                        {title: "Water/slot", field: "water_per_slot", align:"right", sorter:"number"},
+                        // {title: "Stomach/slot", field: "fullness_per_slot", align:"right", sorter:"number"},
+                        // {title: "Energy/weight", field: "energy_per_weight", align:"right", sorter:"number"},
+                        // {title: "Water/weight", field: "water_per_weight", align:"right", sorter:"number"},
+                        // {title: "Stomach/weight", field: "fullness_per_weight", align:"right", sorter:"number"},
+                        // {title: "Stage", field: "stage", align:"right"},
+                    ],
+                };
+
+                var table = new Tabulator("#dayz-food-table", foodTableParams);
+                var tableBlacklisted = new Tabulator("#dayz-food-blacklisted-table", foodTableParams);
+                table.setData("dayz-food_1.04.json");
+                tableBlacklisted.setData("dayz-food-blacklisted_1.04.json");
+            });
+        </script>
+    </head>
+    <body>
+        <h1>DayZ 1.04 food values</h1>
+        <table id="dayz-food-table"></table>
+        <h2>Unreleased or rotten/burned</h2>
+        <table id="dayz-food-blacklisted-table"></table>
+    </body>
+</html>

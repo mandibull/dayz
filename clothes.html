@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>DayZ 1.04 clothes values</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.2.7/css/tabulator.min.css" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.2.7/js/tabulator.min.js"></script>
+        <script>
+            $(function() {
+                var clothesTableParams = {
+                    layout: "fitColumns",
+                    responsiveLayout: "hide",
+                    // pagination: "local",
+                    // paginationSize: 30,
+                    initialSort: [
+                        {column: "name", dir: "asc"},
+                    ],
+                    columns: [
+                        {title: "Name", field: "name", headerFilter:"input"},
+                        // {title: "Slot", field: "inventory_slot", headerFilter:"input"},
+                        {title: "ID", field: "id", headerFilter:"input"},
+                        {title: "Weight (g)", field: "weight", align:"right", sorter:"number"},
+                        {title: "Size", field: "size", align:"right", sorter:"number"},
+                        {title: "Visibility", field: "visibility", align:"right", sorter:"number"},
+                        {title: "Heat Isolation", field: "heat_isolation", align:"right", sorter:"number"},
+                        {title: "Absorbency", field: "absorbency", align:"right", sorter:"number"},
+                        {title: "Durability", field: "durability", align:"right", sorter:"number"},
+                        {title: "Hitpoints", field: "hitpoints", align:"right", sorter:"number"},
+                        {title: "Health armor<br>against projectile", field: "armor_Projectile_Health", align:"right", sorter:"number"},
+                        {title: "Blood armor<br>against projectile", field: "armor_Projectile_Blood", align:"right", sorter:"number"},
+                        {title: "Shock armor<br>against projectile", field: "armor_Projectile_Shock", align:"right", sorter:"number"},
+                        {title: "Health armor<br>against infected", field: "armor_Infected_Health", align:"right", sorter:"number"},
+                        {title: "Blood armor<br>against infected", field: "armor_Infected_Blood", align:"right", sorter:"number"},
+                        {title: "Shock armor<br>against infected", field: "armor_Infected_Shock", align:"right", sorter:"number"},
+                        {title: "Health armor<br>against melee", field: "armor_Melee_Health", align:"right", sorter:"number"},
+                        {title: "Blood armor<br>against melee", field: "armor_Melee_Blood", align:"right", sorter:"number"},
+                        {title: "Shock armor<br>against melee", field: "armor_Melee_Shock", align:"right", sorter:"number"},
+                    ],
+                };
+                new Tabulator("#dayz-clothes-body-table", clothesTableParams).setData("dayz-clothes-body_1.04.json");
+                new Tabulator("#dayz-clothes-eyewear-table", clothesTableParams).setData("dayz-clothes-eyewear_1.04.json");
+                new Tabulator("#dayz-clothes-feet-table", clothesTableParams).setData("dayz-clothes-feet_1.04.json");
+                new Tabulator("#dayz-clothes-gloves-table", clothesTableParams).setData("dayz-clothes-gloves_1.04.json");
+                new Tabulator("#dayz-clothes-headgear-table", clothesTableParams).setData("dayz-clothes-headgear_1.04.json");
+                new Tabulator("#dayz-clothes-hips-table", clothesTableParams).setData("dayz-clothes-hips_1.04.json");
+                new Tabulator("#dayz-clothes-legs-table", clothesTableParams).setData("dayz-clothes-legs_1.04.json");
+                new Tabulator("#dayz-clothes-mask-table", clothesTableParams).setData("dayz-clothes-mask_1.04.json");
+                new Tabulator("#dayz-clothes-vest-table", clothesTableParams).setData("dayz-clothes-vest_1.04.json");
+            });
+        </script>
+    </head>
+    <body>
+        <h1>DayZ 1.04 clothes values</h1>
+        <h2>Vest</h2>
+        <table id="dayz-clothes-vest-table"></table>
+        <h2>Body</h2>
+        <table id="dayz-clothes-body-table"></table>
+        <h2>Legs</h2>
+        <table id="dayz-clothes-legs-table"></table>
+        <h2>Head</h2>
+        <table id="dayz-clothes-headgear-table"></table>
+        <h2>Gloves</h2>
+        <table id="dayz-clothes-gloves-table"></table>
+        <h2>Feet</h2>
+        <table id="dayz-clothes-feet-table"></table>
+        <h2>Hips</h2>
+        <table id="dayz-clothes-hips-table"></table>
+        <h2>Mask</h2>
+        <table id="dayz-clothes-mask-table"></table>
+        <h2>Eyewear</h2>
+        <table id="dayz-clothes-eyewear-table"></table>
+    </body>
+</html>
