@@ -1,40 +1,49 @@
 <html>
     <head>
-        <title>DayZ 1.04 survivor data</title>
+        <title>DayZ survivor data</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.2.7/css/tabulator.min.css" />
         <link rel="stylesheet" href="style.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.2.7/js/tabulator.min.js"></script>
         <script>
             $(function() {
+                var limbFormatter = function(cell, formatterParams, onRendered) {
+                    if (cell.getRow().getData().is_limb) {
+                        return '<span style="color:#D50032;">' + cell.getValue() + '</span>';
+                    } else {
+                        return cell.getValue();
+                    }
+                };
                 var meleeDamageTableParams = {
-                    layout: "fitColumns",
-                    responsiveLayout: "hide",
+                    //layout: "fitColumns",
+                    //responsiveLayout: "hide",
                     // pagination: "local",
                     // paginationSize: 30,
                     initialSort: [
                         {column: "id", dir: "asc"},
                     ],
                     columns: [
-                        {title: "ID",  field: "id"},
+                        {title: "ID", width: 100, field: "id", formatter: limbFormatter},
+                        {title: "Limb", width: 100, field: "is_limb"},
+                        {title: "Fatal<br>injury<br>coef", width: 80, field: "fatal_injury_coef", align:"right", sorter:"number"},
 
                         {title: "Health", width: 80, field: "Health_hitpoints", align:"right", sorter:"number"},
-                        {title: "Health<br>to global<br>hp coef", field: "Health_transferToGlobalCoef", align:"right", sorter:"number"},
-                        {title: "Health<br>coef vs<br>projectile", field: "armor_Projectile_Health_damage", align:"right", sorter:"number"},
-                        {title: "Health<br>coef vs<br>infected", field: "armor_Infected_Health_damage", align:"right", sorter:"number"},
-                        {title: "Health<br>coef vs<br>melee", field: "armor_Melee_Health_damage", align:"right", sorter:"number"},
+                        {title: "Health<br>to global<br>health coef", width: 110, field: "Health_transferToGlobalCoef", align:"right", sorter:"number"},
+                        {title: "Health<br>coef vs<br>projectile", width: 110, field: "armor_Projectile_Health_damage", align:"right", sorter:"number"},
+                        {title: "Health<br>coef vs<br>infected", width: 110, field: "armor_Infected_Health_damage", align:"right", sorter:"number"},
+                        {title: "Health<br>coef vs<br>melee", width: 110, field: "armor_Melee_Health_damage", align:"right", sorter:"number"},
 
                         {title: "Blood", width: 80, field: "Blood_hitpoints", align:"right", sorter:"number"},
-                        {title: "Blood<br>to global<br>hp coef", field: "Blood_transferToGlobalCoef", align:"right", sorter:"number"},
-                        {title: "Blood<br>coef vs<br>projectile", field: "armor_Projectile_Blood_damage", align:"right", sorter:"number"},
-                        {title: "Blood<br>coef vs<br>infected", field: "armor_Infected_Blood_damage", align:"right", sorter:"number"},
-                        {title: "Blood<br>coef vs<br>melee", field: "armor_Melee_Blood_damage", align:"right", sorter:"number"},
+                        {title: "Blood<br>to global<br>blood coef", width: 80, field: "Blood_transferToGlobalCoef", align:"right", sorter:"number"},
+                        {title: "Blood<br>coef vs<br>projectile", width: 110, field: "armor_Projectile_Blood_damage", align:"right", sorter:"number"},
+                        {title: "Blood<br>coef vs<br>infected", width: 110, field: "armor_Infected_Blood_damage", align:"right", sorter:"number"},
+                        {title: "Blood<br>coef vs<br>melee", width: 110, field: "armor_Melee_Blood_damage", align:"right", sorter:"number"},
                         
                         {title: "Shock", width: 80, field: "Shock_hitpoints", align:"right", sorter:"number"},
-                        {title: "Shock<br>to global<br>hp coef", field: "Shock_transferToGlobalCoef", align:"right", sorter:"number"},
-                        {title: "Shock<br>coef vs<br>projectile", field: "armor_Projectile_Shock_damage", align:"right", sorter:"number"},
-                        {title: "Shock<br>coef vs<br>infected", field: "armor_Infected_Shock_damage", align:"right", sorter:"number"},
-                        {title: "Shock<br>coef vs<br>melee", field: "armor_Melee_Shock_damage", align:"right", sorter:"number"},
+                        {title: "Shock<br>to global<br>shock coef", width: 110, field: "Shock_transferToGlobalCoef", align:"right", sorter:"number"},
+                        {title: "Shock<br>coef vs<br>projectile", width: 110, field: "armor_Projectile_Shock_damage", align:"right", sorter:"number"},
+                        {title: "Shock<br>coef vs<br>infected", width: 110, field: "armor_Infected_Shock_damage", align:"right", sorter:"number"},
+                        {title: "Shock<br>coef vs<br>melee", width: 110, field: "armor_Melee_Shock_damage", align:"right", sorter:"number"},
                     ],
                 };
 
@@ -43,8 +52,7 @@
         </script>
     </head>
     <body>
-        <h1>DayZ 1.04 survivor data</h1>
-        <p>Note: "shock" system is not in game yet.</p>
+        <h1>DayZ survivor data</h1>
         <p>From my understanding, if a limb reaches 0 health you will die.</p>
         <h2>Global survivor health values (non-limb)</h2>
         <ul>
@@ -53,6 +61,9 @@
             <li>Shock: 100</li>
         </ul>
         <h2>Limb health and damage resistance</h2>
-        <table id="dayz-survivor-body-table"></table>
+        <table id="dayz-survivor-body-table" style="width: 1710px;"></table>
+
+        <h2>Hitboxes</h2>
+        <img src="body.png" />
     </body>
 </html>
