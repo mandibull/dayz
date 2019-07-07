@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>DayZ 1.04 feet damage</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+        
+    <body>
+        <h1>DayZ 1.04 feet damage</h1>
+
+        <h2>Data</h2>
+        <div style="padding-left: 1em;">
+            <h3 style="margin-bottom: 0em;">Surface modifier</h3>
+            <table>
+                <tr><td>default</td><td>0.023</td></tr>
+                <tr><td>grass</td><td>0.023</td></tr>
+                <tr><td>dirt</td><td>0.058</td></tr>
+                <tr><td>concrete</td><td>0.117</td></tr>
+                <tr><td>gravel</td><td>0.234</td></tr>
+                <tr><td>rock</td><td>0.702</td></tr>
+            </table>
+            <h3 style="margin-bottom: 0em;">Movement modifier</h3>
+            <table>
+                <tr><td>sprint</td><td>1.0</td></tr>
+                <tr><td>run</td><td>0.5</td></tr>
+                <tr><td>walk</td><td>0.0</td></tr>
+            </table>
+        </div>
+
+        <h2>Shoes Damage</h2>
+        <div style="padding-left: 1em;">
+            <p>Shoes damage every 10 steps = surface modifier.</p>
+            <p>Example: 100 steps on rock = 10 * 0.702 = 7 shoes damage.</p>
+        </div>
+
+        <h2>Feet Bleed Chance</h2>
+        <div style="padding-left: 1em;">
+            <p>One feet (randomly picking left or right) bleed probability every 10 steps = movement modifier * surface modifier.</p>
+            <p>Examples:</p>
+            <ul>
+                <li>you can't bleed if you walk</li>
+                <li>every 10 sprint steps on rock you have a 70% chance of a foot bleeding</li>
+                <li>every 10 run steps on rock you have a 35% chance of a foot bleeding</li>
+                <li>every 10 sprint steps on grass you have a 2.3% chance of a foot bleeding</li>
+                <li>every 10 run steps on grass you have a 1.65% chance of a foot bleeding</li>
+                <li>probability of at least one foot bleeding after n-steps = 1 - (1 - speed modifier * surface modifier) ^ (n / 10)</li>
+                <li>example graph after n-steps: <a target="_blank" href="https://www.desmos.com/calculator/tp9gypb5rq">https://www.desmos.com/calculator/tp9gypb5rq</a>
+                    <ul>
+                        <li>red is running on concrete</li>
+                        <li>green is sprinting on grass</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
