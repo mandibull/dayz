@@ -8,7 +8,7 @@
         <script>
             $(function() {
                 var limbFormatter = function(cell, formatterParams, onRendered) {
-                    if (cell.getRow().getData().is_limb) {
+                    if (cell.getRow().getData().is_vital_organ) {
                         return '<span style="color:#D50032;">' + cell.getValue() + '</span>';
                     } else {
                         return cell.getValue();
@@ -24,7 +24,7 @@
                     ],
                     columns: [
                         {title: "ID", width: 100, field: "id", formatter: limbFormatter},
-                        {title: "Limb", width: 100, field: "is_limb"},
+                        // {title: "Vital organ", width: 100, field: "is_vital_organ"},
                         {title: "Fatal<br>injury<br>coef", width: 80, field: "fatal_injury_coef", align:"right", sorter:"number"},
 
                         {title: "Health", width: 80, field: "Health_hitpoints", align:"right", sorter:"number"},
@@ -47,20 +47,21 @@
                     ],
                 };
 
-                new Tabulator("#dayz-survivor-body-table", meleeDamageTableParams).setData("dayz-survivor-body_1.04.json");
+                new Tabulator("#dayz-survivor-body-table", meleeDamageTableParams).setData("data/survivor-body.json");
             });
         </script>
     </head>
     <body>
         <h1>DayZ survivor data</h1>
         <p>From my understanding, if a limb reaches 0 health you will die.</p>
-        <h2>Global survivor health values (non-limb)</h2>
+        <p>The only vital organ in game right now is the brain.</p>
+        <h2>Global survivor health values (non-limb specific)</h2>
         <ul>
             <li>Health: 100</li>
             <li>Blood: 5000</li>
             <li>Shock: 100</li>
         </ul>
-        <h2>Limb health and damage resistance</h2>
+        <h2>Limb/organs health and damage resistance</h2>
         <table id="dayz-survivor-body-table" style="width: 1710px;"></table>
 
         <h2>Hitboxes</h2>

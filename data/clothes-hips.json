@@ -1,0 +1,56 @@
+[
+    {
+        "hitpoints": 100.0,
+        "id": "CivilianBelt",
+        "inventory_slot": "Hips",
+        "name": "Belt",
+        "nb_slots": 3,
+        "size": "3 slots (3x1)",
+        "weight": 20.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "MilitaryBelt",
+        "inventory_slot": "Hips",
+        "name": "Tactical Belt",
+        "nb_slots": 3,
+        "size": "3 slots (3x1)",
+        "weight": 20.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "LeatherBelt_Natural",
+        "inventory_slot": "Hips",
+        "name": "Leather Belt",
+        "nb_slots": 3,
+        "size": "3 slots (3x1)",
+        "weight": 20.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "LeatherBelt_Beige",
+        "inventory_slot": "Hips",
+        "name": "Leather Belt",
+        "nb_slots": 3,
+        "size": "3 slots (3x1)",
+        "weight": 20.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "LeatherBelt_Brown",
+        "inventory_slot": "Hips",
+        "name": "Leather Belt",
+        "nb_slots": 3,
+        "size": "3 slots (3x1)",
+        "weight": 20.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "LeatherBelt_Black",
+        "inventory_slot": "Hips",
+        "name": "Leather Belt",
+        "nb_slots": 3,
+        "size": "3 slots (3x1)",
+        "weight": 20.0
+    }
+]

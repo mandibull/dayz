@@ -1,0 +1,690 @@
+[
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 13.0,
+        "id": "FirearmHit_Pistol",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 13.0,
+        "id": "FirearmHit_Rifle",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 17.0,
+        "id": "FirearmHit_Rifle_Buttstock",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 20.0,
+        "id": "FirearmHit_Rifle_Bayonet",
+        "shock_damage": 7.0
+    },
+    {
+        "animal_multiplier": 0.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleeProd",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 0.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleeProd_Heavy",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 0.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleeLightBlunt2",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 0.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleeLightBlunt2_Heavy",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 5.0,
+        "bleed_chance": 0.3,
+        "blood_damage": 100.0,
+        "health_damage": 15.0,
+        "id": "MeleeSlash",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 5.0,
+        "bleed_chance": 0.3,
+        "blood_damage": 100.0,
+        "health_damage": 15.0,
+        "id": "MeleeSlash_Heavy",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 5.0,
+        "bleed_chance": 0.3,
+        "blood_damage": 100.0,
+        "health_damage": 15.0,
+        "id": "MeleeSlash2",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 5.0,
+        "bleed_chance": 0.3,
+        "blood_damage": 100.0,
+        "health_damage": 15.0,
+        "id": "MeleeSlash2_Heavy",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 0.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 15.0,
+        "id": "MeleeHeavybat",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 0.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 15.0,
+        "id": "MeleeHeavybat_Heavy",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 15.0,
+        "id": "MeleeMeatTenderizer",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 15.0,
+        "id": "MeleeMeatTenderizer_Heavy",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleeLightBlunt",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleeLightBlunt_Heavy",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 1.2,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 15.0,
+        "id": "MeleeLightBluntShock",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 1.2,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 15.0,
+        "id": "MeleeLightBluntShock_Heavy",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 0.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 5.0,
+        "id": "MeleeSoft",
+        "shock_damage": 5.0
+    },
+    {
+        "animal_multiplier": 0.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 5.0,
+        "id": "MeleeSoft_Heavy",
+        "shock_damage": 5.0
+    },
+    {
+        "animal_multiplier": 0.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleeFist",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 0.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 13.0,
+        "id": "MeleeFist_Heavy",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 0.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 13.0,
+        "id": "MeleeBrassKnuckles",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 0.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 17.0,
+        "id": "MeleeBrassKnuckles_Heavy",
+        "shock_damage": 34.0
+    },
+    {
+        "animal_multiplier": 1.5,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 15.0,
+        "id": "MeleeBlunt",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 1.5,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 15.0,
+        "id": "MeleeBlunt_Heavy",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 0.0,
+        "health_damage": 17.0,
+        "id": "MeleeBat",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 1.5,
+        "bleed_chance": 1.0,
+        "blood_damage": 0.0,
+        "health_damage": 25.0,
+        "id": "MeleeBat_Heavy",
+        "shock_damage": 40.0
+    },
+    {
+        "animal_multiplier": 4.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 17.0,
+        "id": "MeleeBatNails",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 1.5,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 25.0,
+        "id": "MeleeBatNails_Heavy",
+        "shock_damage": 40.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 15.0,
+        "id": "MeleeWoodBlunt",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 15.0,
+        "id": "MeleeWoodBlunt_Heavy",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 25.0,
+        "id": "MeleeHatchet",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 34.0,
+        "id": "MeleeHatchet_Heavy",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 5.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 20.0,
+        "id": "MeleeWolf",
+        "shock_damage": 12.0
+    },
+    {
+        "animal_multiplier": 5.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 20.0,
+        "id": "MeleeWolf_Heavy",
+        "shock_damage": 12.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.2,
+        "blood_damage": 100.0,
+        "health_damage": 15.0,
+        "id": "MeleeStab",
+        "shock_damage": 10.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.2,
+        "blood_damage": 100.0,
+        "health_damage": 15.0,
+        "id": "MeleeStab_Heavy",
+        "shock_damage": 10.0
+    },
+    {
+        "animal_multiplier": 3.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 25.0,
+        "id": "MeleeMachete",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 3.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 34.0,
+        "id": "MeleeMachete_Heavy",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 4.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 34.0,
+        "id": "MeleeAxe",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 5.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 55.0,
+        "id": "MeleeAxe_Heavy",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 5.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 34.0,
+        "id": "MeleeSword",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 5.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 34.0,
+        "id": "MeleeSword_Heavy",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 4.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 34.0,
+        "id": "MeleeFireAxe",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 5.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 55.0,
+        "id": "MeleeFireAxe_Heavy",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 25.0,
+        "id": "MeleePitchfork",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 34.0,
+        "id": "MeleePitchfork_Heavy",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 4.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 34.0,
+        "id": "MeleePickaxe",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 4.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 55.0,
+        "id": "MeleePickaxe_Heavy",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 5.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 15.0,
+        "id": "MeleeChainsaw",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 5.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 15.0,
+        "id": "MeleeChainsaw_Heavy",
+        "shock_damage": 0.0
+    },
+    {
+        "animal_multiplier": 1.5,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 15.0,
+        "id": "MeleeSickle",
+        "shock_damage": 12.0
+    },
+    {
+        "animal_multiplier": 1.5,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 15.0,
+        "id": "MeleeSickle_Heavy",
+        "shock_damage": 12.0
+    },
+    {
+        "animal_multiplier": 1.5,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 17.0,
+        "id": "MeleeKnife",
+        "shock_damage": 7.0
+    },
+    {
+        "animal_multiplier": 1.5,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 25.0,
+        "id": "MeleeKnife_Heavy",
+        "shock_damage": 12.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 20.0,
+        "id": "MeleeSpear",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 25.0,
+        "id": "MeleeSpear_Heavy",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 0.25,
+        "blood_damage": 100.0,
+        "health_damage": 15.0,
+        "id": "MeleeFieldShovel",
+        "shock_damage": 12.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 0.25,
+        "blood_damage": 100.0,
+        "health_damage": 15.0,
+        "id": "MeleeFieldShovel_Heavy",
+        "shock_damage": 12.0
+    },
+    {
+        "animal_multiplier": 1.5,
+        "bleed_chance": 1.0,
+        "blood_damage": 0.0,
+        "health_damage": 17.0,
+        "id": "MeleeCrowbar",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 1.5,
+        "bleed_chance": 1.0,
+        "blood_damage": 0.0,
+        "health_damage": 25.0,
+        "id": "MeleeCrowbar_Heavy",
+        "shock_damage": 40.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleePliers",
+        "shock_damage": 10.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 13.0,
+        "id": "MeleePliers_Heavy",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 13.0,
+        "id": "MeleeHammer",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 17.0,
+        "id": "MeleeHammer_Heavy",
+        "shock_damage": 34.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 13.0,
+        "id": "MeleeScrewdriver",
+        "shock_damage": 10.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 17.0,
+        "id": "MeleeScrewdriver_Heavy",
+        "shock_damage": 10.0
+    },
+    {
+        "animal_multiplier": 3.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 0.0,
+        "health_damage": 25.0,
+        "id": "MeleeSledgeHammer",
+        "shock_damage": 50.0
+    },
+    {
+        "animal_multiplier": 3.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 0.0,
+        "health_damage": 34.0,
+        "id": "MeleeSledgeHammer_Heavy",
+        "shock_damage": 100.0
+    },
+    {
+        "animal_multiplier": 1.5,
+        "bleed_chance": 1.0,
+        "blood_damage": 0.0,
+        "health_damage": 17.0,
+        "id": "MeleeWrench",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 1.5,
+        "bleed_chance": 1.0,
+        "blood_damage": 0.0,
+        "health_damage": 25.0,
+        "id": "MeleeWrench_Heavy",
+        "shock_damage": 40.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleeFarmingHoe",
+        "shock_damage": 12.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleeFarmingHoe_Heavy",
+        "shock_damage": 12.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 25.0,
+        "id": "MeleeShovel",
+        "shock_damage": 50.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 34.0,
+        "id": "MeleeShovel_Heavy",
+        "shock_damage": 100.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleeStoneKnife",
+        "shock_damage": 5.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 0.0,
+        "health_damage": 13.0,
+        "id": "MeleeStoneKnife_Heavy",
+        "shock_damage": 5.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 13.0,
+        "id": "MeleeHacksaw",
+        "shock_damage": 5.0
+    },
+    {
+        "animal_multiplier": 1.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 100.0,
+        "health_damage": 13.0,
+        "id": "MeleeHacksaw_Heavy",
+        "shock_damage": 5.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleeFireExtinguisher",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 0.0,
+        "blood_damage": 0.0,
+        "health_damage": 10.0,
+        "id": "MeleeFireExtinguisher_Heavy",
+        "shock_damage": 15.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 0.0,
+        "health_damage": 17.0,
+        "id": "MeleePipeWrench",
+        "shock_damage": 20.0
+    },
+    {
+        "animal_multiplier": 2.0,
+        "bleed_chance": 1.0,
+        "blood_damage": 0.0,
+        "health_damage": 25.0,
+        "id": "MeleePipeWrench_Heavy",
+        "shock_damage": 34.0
+    }
+]

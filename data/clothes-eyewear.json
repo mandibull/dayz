@@ -1,0 +1,92 @@
+[
+    {
+        "hitpoints": 100.0,
+        "id": "SportGlasses_Black",
+        "inventory_slot": "Eyewear",
+        "name": "Athletic Sunglasses",
+        "nb_slots": 3,
+        "size": "3 slots (3x1)",
+        "weight": 20.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "SportGlasses_Blue",
+        "inventory_slot": "Eyewear",
+        "name": "Athletic Sunglasses",
+        "nb_slots": 3,
+        "size": "3 slots (3x1)",
+        "weight": 20.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "SportGlasses_Green",
+        "inventory_slot": "Eyewear",
+        "name": "Athletic Sunglasses",
+        "nb_slots": 3,
+        "size": "3 slots (3x1)",
+        "weight": 20.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "SportGlasses_Orange",
+        "inventory_slot": "Eyewear",
+        "name": "Athletic Sunglasses",
+        "nb_slots": 3,
+        "size": "3 slots (3x1)",
+        "weight": 20.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "AviatorGlasses",
+        "inventory_slot": "Eyewear",
+        "name": "Aviator Sunglasses",
+        "nb_slots": 2,
+        "size": "2 slots (2x1)",
+        "weight": 36.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "DesignerGlasses",
+        "inventory_slot": "Eyewear",
+        "name": "Casual Sunglasses",
+        "nb_slots": 2,
+        "size": "2 slots (2x1)",
+        "weight": 40.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "ThickFramesGlasses",
+        "inventory_slot": "Eyewear",
+        "name": "Classic Glasses",
+        "nb_slots": 2,
+        "size": "2 slots (2x1)",
+        "weight": 50.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "ThinFramesGlasses",
+        "inventory_slot": "Eyewear",
+        "name": "Slim Glasses",
+        "nb_slots": 2,
+        "size": "2 slots (2x1)",
+        "weight": 30.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "TacticalGoggles",
+        "inventory_slot": "Eyewear",
+        "name": "Tactical Goggles",
+        "nb_slots": 2,
+        "size": "2 slots (2x1)",
+        "weight": 100.0
+    },
+    {
+        "hitpoints": 100.0,
+        "id": "NVGHeadstrap",
+        "inventory_slot": "Eyewear",
+        "name": "NVG Headstrap",
+        "nb_slots": 9,
+        "size": "9 slots (3x3)",
+        "weight": 150.0
+    }
+]
