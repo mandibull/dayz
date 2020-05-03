@@ -179,15 +179,15 @@
         "animal_multiplier": 0.0,
         "bleed_chance": 0.0,
         "blood_damage": 0.0,
-        "health_damage": 10.0,
+        "health_damage": 7.0,
         "id": "MeleeFist",
-        "shock_damage": 15.0
+        "shock_damage": 10.0
     },
     {
         "animal_multiplier": 0.0,
         "bleed_chance": 0.0,
         "blood_damage": 0.0,
-        "health_damage": 13.0,
+        "health_damage": 14.0,
         "id": "MeleeFist_Heavy",
         "shock_damage": 15.0
     },
