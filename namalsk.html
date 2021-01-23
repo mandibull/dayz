@@ -1,0 +1,464 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+        integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css"
+        integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA=="
+        crossorigin="anonymous" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+        integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
+        crossorigin="anonymous" /> -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"
+        integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"
+        integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg=="
+        crossorigin="anonymous"></script>
+    <style>
+        .leaflet-container .leaflet-control-mouseposition {
+            background-color: #18181d;
+            padding: 0 5px;
+            margin: 0;
+            color: #fff;
+            /*font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;*/
+            font: 12px/1.5 Consolas, 'Courier New', monospace;
+        }
+    </style>
+    <script>
+        L.Control.MousePosition = L.Control.extend({
+            options: {
+                position: 'bottomleft',
+                separator: ' : ',
+                emptyString: 'Unavailable',
+                lngFirst: false,
+                numDigits: 5,
+                lngFormatter: undefined,
+                latFormatter: undefined,
+                prefix: ""
+            },
+
+            onAdd: function (map) {
+                this._container = L.DomUtil.create('div', 'leaflet-control-mouseposition');
+                L.DomEvent.disableClickPropagation(this._container);
+                map.on('mousemove', this._onMouseMove, this);
+                this._container.innerHTML = this.options.emptyString;
+                return this._container;
+            },
+
+            onRemove: function (map) {
+                map.off('mousemove', this._onMouseMove)
+            },
+
+            _onMouseMove: function (e) {
+                var lng = this.options.lngFormatter ? this.options.lngFormatter(e.latlng.lng) : L.Util.formatNum(e.latlng.lng, this.options.numDigits);
+                var lat = this.options.latFormatter ? this.options.latFormatter(e.latlng.lat) : L.Util.formatNum(e.latlng.lat, this.options.numDigits);
+                var value = this.options.lngFirst ? lng + this.options.separator + lat : lat + this.options.separator + lng;
+                var prefixAndValue = this.options.prefix + ' ' + value;
+                this._container.innerHTML = prefixAndValue;
+            }
+
+        });
+
+        L.Map.mergeOptions({
+            positionControl: false
+        });
+
+        L.Map.addInitHook(function () {
+            if (this.options.positionControl) {
+                this.positionControl = new L.Control.MousePosition();
+                this.addControl(this.positionControl);
+            }
+        });
+
+        L.control.mousePosition = function (options) {
+            return new L.Control.MousePosition(options);
+        };
+    </script>
+    <style>
+        ::selection {
+            color: inherit;
+            background: inherit;
+        }
+
+        #gui {
+            z-index: 1000;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+
+            border-radius: 10px;
+            width: 480px;
+            font-family: sans-serif;
+            margin: 100px auto;
+            padding: 20px;
+
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        #fileElem {
+            display: none;
+        }
+
+        #map-div {
+            background-color: #161716;
+            width: 100%;
+            height: calc(100% - 38px);
+        }
+
+        .map-container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .leaflet-control-zoom {
+            display: none;
+        }
+
+        #wrapper {
+            overflow-x: hidden;
+        }
+
+        #sidebar-wrapper {
+            min-height: 100vh;
+            margin-left: -15rem;
+            -webkit-transition: margin .25s ease-out;
+            -moz-transition: margin .25s ease-out;
+            -o-transition: margin .25s ease-out;
+            transition: margin .25s ease-out;
+        }
+
+        #sidebar-wrapper .sidebar-heading {
+            padding: 0.875rem 1.25rem;
+            font-size: 1.2rem;
+        }
+
+        #sidebar-wrapper .list-group {
+            width: 15rem;
+        }
+
+        #page-content-wrapper {
+            min-width: 100vw;
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+            margin-left: 0;
+        }
+
+        #sidebar-wrapper {
+            margin-left: 0;
+        }
+
+        #page-content-wrapper {
+            min-width: 0;
+            width: 100%;
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+            margin-left: -15rem;
+        }
+
+        #player-container {
+            display: none;
+        }
+
+        #player-list {
+            height: 800px;
+            overflow-y: scroll;
+        }
+
+        #player-list>li {
+            padding: .1rem 1.0rem;
+            font: 12px/1.5 Consolas, 'Courier New', monospace;
+        }
+
+        #time-slider {
+            max-width: 800px;
+        }
+    </style>
+    <script>
+        let map_image_url = 'https://cdn.cftools.de/static_assets/game_labs/maps/game_dayz_namalsk.png';
+        let factor_game_to_map = 0.05859375;
+        let factor_map_to_game = 17.0666666667;
+
+        function game_to_map(x) { return roundNumber(x * factor_game_to_map, 2); }
+        function map_to_game(x) { return roundNumber(x * factor_map_to_game, 2); }
+
+        const playerPositionRegex = /^Player \"(.*)\" (\(DEAD\) )?\(id=([^ ]+) pos=<([0-9.]+), ([0-9.]+), ([0-9.]+)>\)$/;
+        let playerMarkers = [];
+        let allPlayers = {};
+        let positionEvents = [];
+        let map_div = null;
+
+        function selectColor(number) {
+            const hue = (number * 137.508) % 360; // use golden angle approximation
+            return `hsl(${hue},100%,75%)`;
+        }
+
+        function sortList(ul) {
+            if (typeof ul == 'string')
+                ul = document.getElementById(ul);
+            var lis = ul.getElementsByTagName('li');
+            var values = [];
+
+            for (var i = 0, l = lis.length; i < l; i++)
+                values.push(lis[i].innerHTML);
+            values.sort(function (a, b) {
+                return a.toLowerCase().localeCompare(b.toLowerCase());
+            });
+            for (var i = 0, l = lis.length; i < l; i++)
+                lis[i].innerHTML = values[i];
+        }
+
+        function displayAllPlayer() {
+            for (const bohemiaId in allPlayers) {
+                let name = allPlayers[bohemiaId].name;
+                let color = allPlayers[bohemiaId].color;
+                addPlayerToSideBar(bohemiaId, name, color);
+            }
+            sortList('player-list');
+        }
+
+        function addPlayerToSideBar(bohemiaId, name, color) {
+            $(`<li class="list-group-item" id="player-${bohemiaId}">`)
+                .text(name)
+                .css('color', color)
+                .appendTo('#player-list');
+            // <span class="badge badge-primary badge-pill">14</span>
+        }
+
+        function addPlayerToMap(bohemiaId, name, color, position) {
+            let player_marker = L.circleMarker(
+                [game_to_map(position[1]), game_to_map(position[0])], {
+                radius: 3.5,
+                fillColor: color,
+                color: '#000',
+                weight: 1.2,
+                opacity: 1,
+                fillOpacity: 1.0,
+                riseOnHover: true,
+                pane: 'player_markers',
+                className: 'player-marker'
+            });
+            player_marker.addTo(map_div);
+            playerMarkers.push(player_marker);
+        }
+
+        function resetPlayerOnMap() {
+            playerMarkers.forEach(function(element) {
+                element.remove();
+            });
+            playerMarkers = [];
+        }
+
+        function displayPositions(index) {
+            let players = positionEvents[index].players;
+
+            console.log(`Displaying index ${index}`);
+
+            resetPlayerOnMap();
+            for (const bohemiaId in players) {
+                let position = players[bohemiaId];
+                let name = allPlayers[bohemiaId].name;
+                let color = allPlayers[bohemiaId].color;
+                addPlayerToMap(bohemiaId, name, color, position);
+            }
+        }
+
+        function displayFileData() {
+            displayAllPlayer();
+            $('#file-load').hide();
+            $('#player-container').show();
+            $("#time-slider").attr('max', positionEvents.length);
+            displayPositions(0);
+            $('#time-slider').on('input change', function (e) {
+                displayPositions(e.target.value - 1);
+            });
+        }
+
+        function processFileData(data) {
+            // reset
+            allPlayers = {};
+            positionEvents = [];
+
+            let logStartDateTime = null;
+            let parsingPlayerPositions = false;
+
+            data.split(/\r?\n/).forEach((line) => {
+                line = line.trim();
+                if (line.length == 0 || line.startsWith('*****')) {
+                    return;
+                }
+                if (line.startsWith('AdminLog started')) {
+                    const dateStr = line.substring(20, 30) + 'T' + line.substring(34, 42) + '.000-05:00';
+                    logStartDateTime = Date.parse(dateStr);
+                    return;
+                }
+
+                let text = line.substring(11);
+
+                if (!parsingPlayerPositions) {
+                    if (text.startsWith('##### PlayerList')) {
+                        parsingPlayerPositions = true;
+                        positionEvents.push({
+                            dateTime: null, // FIXME
+                            players: {},
+                        });
+                        return;
+                    }
+                } else {
+                    if (text == '#####') {
+                        parsingPlayerPositions = false;
+                        return;
+                    }
+                    if (!text.startsWith('Player "')) {
+                        return;
+                    }
+                    // TODO: handle time
+
+                    const m = playerPositionRegex.exec(text);
+                    if (m !== null) {
+                        const playerName = m[1];
+                        const bohemiaId = m[3];
+                        const position = [m[4], m[5], m[6]];
+                        positionEvents[positionEvents.length - 1].players[bohemiaId] = position;
+                        if (!(bohemiaId in allPlayers)) {
+                            allPlayers[bohemiaId] = {
+                                name: playerName,
+                                color: selectColor(Object.keys(allPlayers).length),
+                            };
+                        }
+                    }
+                }
+            });
+
+            displayFileData();
+        }
+
+        function handleFile(input) {
+            let reader = new FileReader();
+            reader.readAsText(input.files[0]);
+            reader.onloadend = function () {
+                processFileData(reader.result);
+            };
+        }
+
+        function roundNumber(num, scale) {
+            if (!("" + num).includes("e")) {
+                return +(Math.round(num + "e+" + scale) + "e-" + scale);
+            } else {
+                var arr = ("" + num).split("e");
+                var sig = ""
+                if (+arr[1] + scale > 0) {
+                    sig = "+";
+                }
+                return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + scale)) + "e-" + scale);
+            }
+        }
+
+        $(document).ready(function () {
+            var markers = new L.LayerGroup();
+            map_div = L.map('map-div', {
+                crs: L.CRS.Simple,
+                maxZoom: 6,
+                minZoom: 0,
+                center: [750 / 2, 750 / 2],
+                layers: [markers],
+                attributionControl: false,
+            });
+            var bounds = [[0, 0], [750, 750]];
+            var image = L.imageOverlay(map_image_url, bounds).addTo(map_div);
+
+            var fitBounds = [[300, 100], [650, 600]];
+            map_div.fitBounds(fitBounds);
+            map_div.createPane('player_markers');
+            map_div.getPane('player_markers').style.zIndex = 550;
+
+            var map_lng = 0;
+            var map_lat = 0;
+
+            L.control.mousePosition({
+                numDigits: 2,
+                emptyString: 'Place cursor in map to display coordinates',
+                lngFormatter: function (lng) {
+                    return map_to_game(lng);
+                },
+                latFormatter: function (lat) {
+                    return map_to_game(lat);
+                }
+            }).addTo(map_div);
+        });
+    </script>
+</head>
+
+<body>
+
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="navbar-dark" id="sidebar-wrapper">
+            <div class="sidebar-heading navbar-brand">DayOne&nbsp;Replay</div>
+
+            <div class="container-fluid" id="file-load">
+                <p>Select a DayZ admin log file to playback player movement on the map.</p>
+                <input type="file" id="fileElem" accept=".ADM" onchange="handleFile(this)">
+                <label class="btn btn-primary button" for="fileElem">Select an ADM file</label>
+            </div>
+
+            <div class="container-fluid" id="player-container">
+                <div class="btn-group btn-group-sm" role="group">
+                    <button type="button" class="btn btn-secondary">Show all players</button>
+                    <button type="button" class="btn btn-secondary">Hide all players</button>
+                </div>
+
+                <ul class="list-group" id="player-list">
+                    <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
+                        3RNO
+                        <span class="badge badge-primary badge-pill">14</span>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            <nav class="navbar navbar-expand-lg">
+                <input type="range" min="1" max="1" class="custom-range" id="time-slider">
+            </nav>
+
+            <div class="container-fluid map-container">
+                <div id="map-div"></div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- <div>
+        <div id="left-menu">Kek
+        </div>
+        <div>
+            <div id="top-menu"></div>
+            <div id="map-div"></div>
+        </div>
+    </div>
+    <div id="gui">
+        <form>
+            <p>Upload a DayZ ADM log file to playback player movement on the map!</p>
+            <input type="file" id="fileElem" accept=".ADM" onchange="handleFile(this)">
+            <label class="button" for="fileElem">Select an ADM file</label>
+        </form>
+    </div> -->
+</body>
+
+</html>
