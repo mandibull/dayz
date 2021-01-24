@@ -182,6 +182,13 @@
         #time-slider {
             max-width: 800px;
         }
+
+        .player-label {
+            position: absolute;
+            font-size: 11px;
+            padding: 1px 5px;
+            border: 1px solid rgba(0, 0, 0, 0.5);
+        }
     </style>
     <script>
         var tzStrings = [
@@ -414,6 +421,13 @@
                 pane: 'player_markers',
                 className: 'player-marker'
             });
+
+            player_marker.bindTooltip(name, {
+                permanent: true,
+                className: 'player-label',
+                offset: [5, 0],
+            });
+
             player_marker.addTo(map_div);
             playerMarkers.push(player_marker);
         }
@@ -567,7 +581,7 @@
             var markers = new L.LayerGroup();
             map_div = L.map('map-div', {
                 crs: L.CRS.Simple,
-                maxZoom: 6,
+                maxZoom: 15,
                 minZoom: 0,
                 center: [750 / 2, 750 / 2],
                 layers: [markers],
@@ -604,6 +618,9 @@
 
         <!-- Sidebar -->
         <div class="navbar-dark" id="sidebar-wrapper">
+            <div class="container-fluid">
+                <img src="https://media.discordapp.net/attachments/484454816756531221/788895337795813406/752265821685809235.gif">
+            </div>
             <div class="sidebar-heading navbar-brand">DayOne&nbsp;Replay</div>
 
             <div class="container-fluid" id="file-load">
