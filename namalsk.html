@@ -110,7 +110,7 @@
         #map-div {
             background-color: #161716;
             width: 100%;
-            height: calc(100% - 38px);
+            height: calc(100% - 43px);
         }
 
         .map-container {
@@ -174,11 +174,6 @@
             overflow-y: scroll;
         }
 
-        #player-list>li {
-            padding: .1rem 1.0rem;
-            font: 12px/1.5 Consolas, 'Courier New', monospace;
-        }
-
         #time-slider {
             max-width: 800px;
         }
@@ -189,8 +184,20 @@
             padding: 1px 5px;
             border: 1px solid rgba(0, 0, 0, 0.5);
         }
+
+        .list-group-item.player-list-label {
+            padding: .1rem 0.5rem;
+            font: 12px/1.5 Consolas, 'Courier New', monospace;
+            margin-right: .5em;
+        }
     </style>
     <script>
+        var maps = {
+            'Namalsk': {},
+            'Livonia': {},
+            'Chernarus': {},
+        };
+
         var tzStrings = [
             { "label": "(GMT-12:00) International Date Line West", "value": "Etc/GMT+12" },
             { "label": "(GMT-11:00) Midway Island, Samoa", "value": "Pacific/Midway" },
@@ -358,6 +365,7 @@
             { "label": "(GMT+13:00) Nuku'alofa", "value": "13" }
         ]
 
+        // TODO: move to map settings
         let map_image_url = 'https://cdn.cftools.de/static_assets/game_labs/maps/game_dayz_namalsk.png';
         let factor_game_to_map = 0.05859375;
         let factor_map_to_game = 17.0666666667;
@@ -369,11 +377,12 @@
         let playerMarkers = [];
         let allPlayers = {};
         let positionEvents = [];
+        let hiddenPlayers = [];
         let map_div = null;
 
         function selectColor(number) {
             const hue = (number * 137.508) % 360; // use golden angle approximation
-            return `hsl(${hue},100%,75%)`;
+            return `hsl(${hue},75%,75%)`;
         }
 
         function sortList(ul) {
@@ -382,8 +391,10 @@
             var lis = ul.getElementsByTagName('li');
             var values = [];
 
-            for (var i = 0, l = lis.length; i < l; i++)
-                values.push(lis[i].innerHTML);
+            console.log(lis);
+            for (var i = 0, l = lis.length; i < l; i++) {
+                values.push($(lis[i]).text());
+            }
             values.sort(function (a, b) {
                 return a.toLowerCase().localeCompare(b.toLowerCase());
             });
@@ -391,19 +402,71 @@
                 lis[i].innerHTML = values[i];
         }
 
-        function displayAllPlayer() {
+        function sortUsingNestedText(parent, childSelector, keySelector) {
+            var items = parent.children(childSelector).sort(function (a, b) {
+                var vA = $(keySelector, a).text();
+                var vB = $(keySelector, b).text();
+                return (vA < vB) ? -1 : (vA > vB) ? 1 : 0;
+            });
+            parent.append(items);
+        }
+
+
+        function hideAllPlayers() {
+            for (const bohemiaId in allPlayers) {
+                const escaped = bohemiaId.replace('=', '\\=');
+                $(`#player-checkbox-${escaped}`).prop('checked', false);
+                hidePlayer(bohemiaId, false);
+            }
+            refreshMap();
+        }
+
+        function showAllPlayers() {
+            for (const bohemiaId in allPlayers) {
+                const escaped = bohemiaId.replace('=', '\\=');
+                $(`#player-checkbox-${escaped}`).prop('checked', true);
+                showPlayer(bohemiaId, false);
+            }
+            refreshMap();
+        }
+
+        function hidePlayer(bohemiaId, refresh = true) {
+            hiddenPlayers.push(bohemiaId);
+            if (refresh)
+                refreshMap();
+        }
+
+        function showPlayer(bohemiaId, refresh = true) {
+            const index = hiddenPlayers.indexOf(bohemiaId);
+            if (index > -1) {
+                hiddenPlayers.splice(index, 1);
+            }
+            if (refresh)
+                refreshMap();
+        }
+
+        function populateSidebar() {
+            hiddenPlayers = [];
             for (const bohemiaId in allPlayers) {
                 let name = allPlayers[bohemiaId].name;
                 let color = allPlayers[bohemiaId].color;
                 addPlayerToSideBar(bohemiaId, name, color);
             }
-            sortList('player-list');
+            sortUsingNestedText($('#player-list'), 'li', 'label');
         }
 
         function addPlayerToSideBar(bohemiaId, name, color) {
-            $(`<li class="list-group-item" id="player-${bohemiaId}">`)
-                .text(name)
+            let checkboxId = `player-checkbox-${bohemiaId}`;
+            let $checkbox = $('<input type="checkbox" class="player-checkbox">')
+                .prop('checked', true)
+                .attr('id', checkboxId)
+                .attr('data-bohemiaId', bohemiaId);
+            let $li = $('<label class="list-group-item player-list-label">')
+                .attr('id', `player-${bohemiaId}`)
+                .attr('for', checkboxId).text(`${name}`)
                 .css('color', color)
+                .prepend(' ')
+                .prepend($checkbox)
                 .appendTo('#player-list');
             // <span class="badge badge-primary badge-pill">14</span>
         }
@@ -453,6 +516,10 @@
             }
         }
 
+        function refreshMap() {
+            displayPositions($('#time-slider').val() - 1);
+        }
+
         function displayPositions(index) {
             let players = positionEvents[index].players;
             const total = positionEvents.length;
@@ -460,6 +527,9 @@
 
             resetPlayerOnMap();
             for (const bohemiaId in players) {
+                if (hiddenPlayers.includes(bohemiaId)) {
+                    continue;
+                }
                 let position = players[bohemiaId];
                 let name = allPlayers[bohemiaId].name;
                 let color = allPlayers[bohemiaId].color;
@@ -468,7 +538,7 @@
         }
 
         function displayFileData() {
-            displayAllPlayer();
+            populateSidebar();
             $('#file-load').hide();
             $('#player-container').show();
             $("#time-slider").attr('max', positionEvents.length);
@@ -577,6 +647,18 @@
 
             $('#time-back-button').click(timeBackButton);
             $('#time-forward-button').click(timeForwardButton);
+            $('#show-all-players-button').click(showAllPlayers);
+            $('#hide-all-players-button').click(hideAllPlayers);
+            // $('#show-player-labels-checkbox')
+
+            $(document).on('change', '.player-checkbox', function (e) {
+                const bohemiaId = $(this).attr('data-bohemiaId');
+                if (this.checked) {
+                    showPlayer(bohemiaId);
+                } else {
+                    hidePlayer(bohemiaId);
+                }
+            });
 
             var markers = new L.LayerGroup();
             map_div = L.map('map-div', {
@@ -618,9 +700,6 @@
 
         <!-- Sidebar -->
         <div class="navbar-dark" id="sidebar-wrapper">
-            <div class="container-fluid">
-                <img src="https://media.discordapp.net/attachments/484454816756531221/788895337795813406/752265821685809235.gif">
-            </div>
             <div class="sidebar-heading navbar-brand">DayOne&nbsp;Replay</div>
 
             <div class="container-fluid" id="file-load">
@@ -630,17 +709,20 @@
             </div>
 
             <div class="container-fluid" id="player-container">
-                <div class="btn-group btn-group-sm" role="group">
-                    <button type="button" class="btn btn-secondary">Show all players</button>
-                    <button type="button" class="btn btn-secondary">Hide all players</button>
+                <div class="form-group">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-secondary" id="show-all-players-button">Show all
+                            players</button>
+                        <button type="button" class="btn btn-secondary" id="hide-all-players-button">Hide all
+                            players</button>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="form-check-input" id="show-player-labels-checkbox" checked>
+                        <label class="form-check-label" for="show-player-labels-checkbox">Show player labels</label>
+                    </div>
                 </div>
 
-                <ul class="list-group" id="player-list">
-                    <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
-                        3RNO
-                        <span class="badge badge-primary badge-pill">14</span>
-                    </li> -->
-                </ul>
+                <ul class="list-group" id="player-list"></ul>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -649,12 +731,13 @@
         <div id="page-content-wrapper">
 
             <nav class="navbar navbar-expand-lg">
-                <input type="range" min="1" max="1" value="1" class="custom-range" id="time-slider">
                 <div>
                     <button id="time-back-button">&lt;</button>
                     <button id="time-forward-button">&gt;</button>
                     <span id="time-slider-text">0 / 0</span>
+                    &nbsp;
                 </div>
+                <input type="range" min="1" max="1" value="1" class="custom-range" id="time-slider">
             </nav>
 
             <div class="container-fluid map-container">
