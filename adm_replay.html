@@ -192,11 +192,31 @@
         }
     </style>
     <script>
+        var selectedMap = 'chernarus';
         var maps = {
-            'Namalsk': {},
-            'Livonia': {},
-            'Chernarus': {},
+            'chernarus': {
+                mapImageUrl: 'https://cdn.cftools.de/static_assets/game_labs/maps/game_dayz_chernarus.png',
+                gameToMap: function (x) { return roundNumber(x * 0.048828125, 2); },
+                mapToGame: function (x) { return roundNumber(x * 20.48, 2); },
+                fitBounds: [[0, 0], [750, 750]],
+            },
+            'livonia': {
+                mapImageUrl: 'https://cdn.cftools.de/static_assets/game_labs/maps/game_dayz_enoch.png',
+                gameToMap: function (x) { return roundNumber(x * 0.05859375, 2); },
+                mapToGame: function (x) { return roundNumber(x * 17.0666666667, 2); },
+                fitBounds: [[0, 0], [750, 750]],
+            },
+            'namalsk': {
+                mapImageUrl: 'https://cdn.cftools.de/static_assets/game_labs/maps/game_dayz_namalsk.png',
+                gameToMap: function (x) { return roundNumber(x * 0.05859375, 2); },
+                mapToGame: function (x) { return roundNumber(x * 17.0666666667, 2); },
+                fitBounds: [[300, 100], [650, 600]],
+            },
         };
+        var mapImageUrl = null;
+        var gameToMap = null;
+        var mapToGame = null;
+        var fitBounds = null;
 
         var tzStrings = [
             { "label": "(GMT-12:00) International Date Line West", "value": "Etc/GMT+12" },
@@ -366,13 +386,6 @@
         ]
 
         // TODO: move to map settings
-        let map_image_url = 'https://cdn.cftools.de/static_assets/game_labs/maps/game_dayz_namalsk.png';
-        let factor_game_to_map = 0.05859375;
-        let factor_map_to_game = 17.0666666667;
-
-        function game_to_map(x) { return roundNumber(x * factor_game_to_map, 2); }
-        function map_to_game(x) { return roundNumber(x * factor_map_to_game, 2); }
-
         const playerPositionRegex = /^Player \"(.*)\" (\(DEAD\) )?\(id=([^ ]+) pos=<([0-9.]+), ([0-9.]+), ([0-9.]+)>\)$/;
         let playerMarkers = [];
         let allPlayers = {};
@@ -473,7 +486,7 @@
 
         function addPlayerToMap(bohemiaId, name, color, position) {
             let player_marker = L.circleMarker(
-                [game_to_map(position[1]), game_to_map(position[0])], {
+                [gameToMap(position[1]), gameToMap(position[0])], {
                 radius: 3.5,
                 fillColor: color,
                 color: '#000',
@@ -628,7 +641,47 @@
             }
         }
 
+        function changeMap() {
+            if (map_div !== null) {
+                map_div.off();
+                map_div.remove();
+            }
+            selectedMap = $('#map-name-select').val();
+            mapImageUrl = maps[selectedMap].mapImageUrl;
+            gameToMap = maps[selectedMap].gameToMap;
+            mapToGame = maps[selectedMap].mapToGame;
+            fitBounds = maps[selectedMap].fitBounds;
+
+            var markers = new L.LayerGroup();
+            map_div = L.map('map-div', {
+                crs: L.CRS.Simple,
+                maxZoom: 15,
+                minZoom: 0,
+                center: [750 / 2, 750 / 2],
+                layers: [markers],
+                attributionControl: false,
+            });
+            var bounds = [[0, 0], [750, 750]];
+            var image = L.imageOverlay(mapImageUrl, bounds).addTo(map_div);
+
+            map_div.fitBounds(fitBounds);
+            map_div.createPane('player_markers');
+            map_div.getPane('player_markers').style.zIndex = 550;
+
+            L.control.mousePosition({
+                numDigits: 2,
+                emptyString: 'Place cursor in map to display coordinates',
+                lngFormatter: function (lng) {
+                    return mapToGame(lng);
+                },
+                latFormatter: function (lat) {
+                    return mapToGame(lat);
+                }
+            }).addTo(map_div);
+        }
+
         $(document).ready(function () {
+            changeMap();
             /*function timezoneSelect() {
                 var options = [],
                     select = document.createElement("select");
@@ -659,37 +712,6 @@
                     hidePlayer(bohemiaId);
                 }
             });
-
-            var markers = new L.LayerGroup();
-            map_div = L.map('map-div', {
-                crs: L.CRS.Simple,
-                maxZoom: 15,
-                minZoom: 0,
-                center: [750 / 2, 750 / 2],
-                layers: [markers],
-                attributionControl: false,
-            });
-            var bounds = [[0, 0], [750, 750]];
-            var image = L.imageOverlay(map_image_url, bounds).addTo(map_div);
-
-            var fitBounds = [[300, 100], [650, 600]];
-            map_div.fitBounds(fitBounds);
-            map_div.createPane('player_markers');
-            map_div.getPane('player_markers').style.zIndex = 550;
-
-            var map_lng = 0;
-            var map_lat = 0;
-
-            L.control.mousePosition({
-                numDigits: 2,
-                emptyString: 'Place cursor in map to display coordinates',
-                lngFormatter: function (lng) {
-                    return map_to_game(lng);
-                },
-                latFormatter: function (lat) {
-                    return map_to_game(lat);
-                }
-            }).addTo(map_div);
         });
     </script>
 </head>
@@ -703,6 +725,12 @@
             <div class="sidebar-heading navbar-brand">DayOne&nbsp;Replay</div>
 
             <div class="container-fluid" id="file-load">
+                <label for="map-name-select">Map:</label>
+                <select class="form-control" id="map-name-select" onchange="changeMap(this)">
+                    <option value="chernarus">Chernarus</option>
+                    <option value="livonia">Livonia</option>
+                    <option value="namalsk">Namalsk</option>
+                </select>
                 <p>Select a DayZ admin log file to playback player movement on the map.</p>
                 <input type="file" id="fileElem" accept=".ADM" onchange="handleFile(this)">
                 <label class="btn btn-primary button" for="fileElem">Select an ADM file</label>
@@ -716,10 +744,10 @@
                         <button type="button" class="btn btn-secondary" id="hide-all-players-button">Hide all
                             players</button>
                     </div>
-                    <div>
+                    <!-- div>
                         <input type="checkbox" class="form-check-input" id="show-player-labels-checkbox" checked>
                         <label class="form-check-label" for="show-player-labels-checkbox">Show player labels</label>
-                    </div>
+                    </div -->
                 </div>
 
                 <ul class="list-group" id="player-list"></ul>
