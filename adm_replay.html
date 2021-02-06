@@ -607,6 +607,7 @@
                 if (line.startsWith('AdminLog started')) {
                     const dateStr = line.substring(20, 30) + 'T' + line.substring(34, 42) + '-05:00';  // TODO: don't hardcore TZ!
                     logStartDateTime = new Date(dateStr);
+                    // console.log(`logStartDateTime: ${logStartDateTime}`);
                     return;
                 }
 
@@ -621,9 +622,10 @@
                             entryDateTime.setHours(parseInt(line.substring(0, 2)));
                             entryDateTime.setMinutes(parseInt(line.substring(3, 5)));
                             entryDateTime.setSeconds(parseInt(line.substring(6, 8)));
-                            if (entryDateTime.getTime() - logStartDateTime.getTime() > 0) {
+                            if (entryDateTime.getTime() - logStartDateTime.getTime() < 0) {
                                 entryDateTime.setDate(entryDateTime.getDate() + 1);
                             }
+                            // console.log(`entryDateTime: ${entryDateTime}`);
                         }
                         positionEvents.push({
                             dateTime: entryDateTime,
