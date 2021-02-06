@@ -1,6 +1,9 @@
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DayOne Replay</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
         integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
         crossorigin="anonymous" />
@@ -175,7 +178,7 @@
         }
 
         #time-slider {
-            max-width: 800px;
+            max-width: 100%;
         }
 
         .player-label {
@@ -393,6 +396,32 @@
         let hiddenPlayers = [];
         let map_div = null;
 
+        document.onkeydown = function (e) {
+            switch (e.which) {
+                case 37: // left
+                    changeFrame(-1);
+                    break;
+                case 38: // up
+                    changeFrame(-10);
+                    break;
+                case 39: // right
+                    changeFrame(1);
+                    break;
+                case 40: // down
+                    changeFrame(10);
+                    break;
+                default:
+                    return;
+            }
+            e.preventDefault();
+        };
+
+        function changeFrame(delta) {
+            const current = parseInt($("#time-slider").val());
+            let target = Math.min(Math.max(0, current + delta), positionEvents.length);
+            $("#time-slider").val(target).change();
+        }
+
         function selectColor(number) {
             const hue = (number * 137.508) % 360; // use golden angle approximation
             return `hsl(${hue},75%,75%)`;
@@ -404,7 +433,6 @@
             var lis = ul.getElementsByTagName('li');
             var values = [];
 
-            console.log(lis);
             for (var i = 0, l = lis.length; i < l; i++) {
                 values.push($(lis[i]).text());
             }
@@ -534,9 +562,11 @@
         }
 
         function displayPositions(index) {
-            let players = positionEvents[index].players;
+            const players = positionEvents[index].players;
+            const dateTime = positionEvents[index].dateTime;
             const total = positionEvents.length;
-            $('#time-slider-text').text(`${index + 1} / ${total}`);
+            // $('#time-slider-text').text(`${index + 1} / ${total}`);
+            $('#time-slider-text').text(dateTime.toString());
 
             resetPlayerOnMap();
             for (const bohemiaId in players) {
@@ -575,8 +605,8 @@
                     return;
                 }
                 if (line.startsWith('AdminLog started')) {
-                    const dateStr = line.substring(20, 30) + 'T' + line.substring(34, 42) + '.000-05:00';
-                    logStartDateTime = Date.parse(dateStr);
+                    const dateStr = line.substring(20, 30) + 'T' + line.substring(34, 42) + '-05:00';  // TODO: don't hardcore TZ!
+                    logStartDateTime = new Date(dateStr);
                     return;
                 }
 
@@ -585,8 +615,18 @@
                 if (!parsingPlayerPositions) {
                     if (text.startsWith('##### PlayerList')) {
                         parsingPlayerPositions = true;
+                        let entryDateTime = null;
+                        if (logStartDateTime) {
+                            entryDateTime = new Date(logStartDateTime.getTime());
+                            entryDateTime.setHours(parseInt(line.substring(0, 2)));
+                            entryDateTime.setMinutes(parseInt(line.substring(3, 5)));
+                            entryDateTime.setSeconds(parseInt(line.substring(6, 8)));
+                            if (entryDateTime.getTime() - logStartDateTime.getTime() > 0) {
+                                entryDateTime.setDate(entryDateTime.getDate() + 1);
+                            }
+                        }
                         positionEvents.push({
-                            dateTime: null, // FIXME
+                            dateTime: entryDateTime,
                             players: {},
                         });
                         return;
@@ -599,7 +639,6 @@
                     if (!text.startsWith('Player "')) {
                         return;
                     }
-                    // TODO: handle time
 
                     const m = playerPositionRegex.exec(text);
                     if (m !== null) {
@@ -660,6 +699,7 @@
                 center: [750 / 2, 750 / 2],
                 layers: [markers],
                 attributionControl: false,
+                keyboard: false,
             });
             var bounds = [[0, 0], [750, 750]];
             var image = L.imageOverlay(mapImageUrl, bounds).addTo(map_div);
@@ -758,14 +798,16 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
 
-            <nav class="navbar navbar-expand-lg">
+            <nav class="navbar navbar-expand-lg" style="display: block;">
                 <div>
+                    <input type="range" min="1" max="1" value="1" class="custom-range" id="time-slider">
+                </div>
+                <div style="display: block;">
                     <button id="time-back-button">&lt;</button>
                     <button id="time-forward-button">&gt;</button>
-                    <span id="time-slider-text">0 / 0</span>
+                    <span id="time-slider-text"></span>
                     &nbsp;
                 </div>
-                <input type="range" min="1" max="1" value="1" class="custom-range" id="time-slider">
             </nav>
 
             <div class="container-fluid map-container">
