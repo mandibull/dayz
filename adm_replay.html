@@ -215,6 +215,12 @@
                 mapToGame: function (x) { return roundNumber(x * 17.0666666667, 2); },
                 fitBounds: [[300, 100], [650, 600]],
             },
+            'esseker': {
+                mapImageUrl: 'https://cdn.cftools.de/static_assets/game_labs/maps/game_dayz_esseker.png',
+                gameToMap: function (x) { return roundNumber(x * 0.05859375, 2); },
+                mapToGame: function (x) { return roundNumber(x * 17.0666666667, 2); },
+                fitBounds: [[0, 0], [750, 750]],
+            },
         };
         var mapImageUrl = null;
         var gameToMap = null;
@@ -772,6 +778,7 @@
                     <option value="chernarus">Chernarus</option>
                     <option value="livonia">Livonia</option>
                     <option value="namalsk">Namalsk</option>
+                    <option value="esseker">Esseker</option>
                 </select>
                 <p>Select a DayZ admin log file to playback player movement on the map.</p>
                 <input type="file" id="fileElem" accept=".ADM" onchange="handleFile(this)">
